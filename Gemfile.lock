@@ -6,6 +6,13 @@ GIT
       omniauth-oauth2 (~> 1.1.0)
 
 GIT
+  remote: git://github.com/newrelic/rpm.git
+  revision: e25d5c30e03f1e374db21d3bb6692c914c710398
+  branch: RUBY-1180
+  specs:
+    newrelic_rpm (3.6.6)
+
+GIT
   remote: git://github.com/pduersteler/font-awesome-sass-rails.git
   revision: acd4bb637e1655bd6404c708c443915af0b482ba
   specs:
@@ -221,7 +228,6 @@ GEM
     net-scp (1.1.2)
       net-ssh (>= 2.6.5)
     net-ssh (2.6.8)
-    newrelic_rpm (3.6.6.147)
     nokogiri (1.5.10)
     oauth (0.4.7)
     oauth2 (0.8.1)
@@ -452,7 +458,7 @@ DEPENDENCIES
   listen
   media_monster_client
   multi_json (~> 1.5.0)
-  newrelic_rpm
+  newrelic_rpm!
   omniauth
   omniauth-facebook
   omniauth-oauth2 (~> 1.1.0)
