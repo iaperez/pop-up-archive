@@ -11,16 +11,7 @@ class FeedPopUp
   end
 
   private
-  def self.is_audio_file?(url)
-    #puts "is_audio_file? url:#{url}"
-    uri = URI.parse(url)
-    ext = (File.extname(uri.path)[1..-1] || "").downcase
-    ['aac', 'aif', 'aiff', 'alac', 'flac', 'm4a', 'm4p', 'mp2', 'mp3', 'mp4', 'ogg', 'raw', 'spx', 'wav', 'wma'].include?(ext)
-  rescue  URI::BadURIError
-    false
-  rescue  URI::InvalidURIError
-    false
-  end
+
 
   def self.add_entries(entries, coll_id)
     collection = Collection.find_by_id(coll_id)
@@ -30,14 +21,38 @@ class FeedPopUp
         unless Item.where(identifier: entry.entry_id, collection_id: coll_id).exists?
           item = Item.new
           item.collection = collection
-          item.description = entry.summary
+          #item.description =Sanitize.clean(entry.summary,:elements => ['r','div'], :remove_contents => true)
+          transformer = lambda do |env|
+            node      = env[:node]
+            node_name = env[:node_name]
+
+            # Don't continue if this node is already whitelisted or is not an element.
+            return if env[:is_whitelisted] || !node.element?
+
+            # Don't continue unless the node is an div.
+            return unless node_name. == 'div'
+
+
+            # We're now certain that this is a div in the summary,
+            Sanitize.clean_node!(node)
+
+            # Now that we're sure that this is a valid YouTube embed and that there are
+            # no unwanted elements or attributes hidden inside it, we can tell Sanitize
+            # to whitelist the current node.
+            {:node_whitelist => [node]}
+          end
+
+          text = Sanitize.clean(entry.summary,:transformers => transformer, :elements => ['a', 'span'],
+                                :attributes => {'a' => ['href', 'title'], 'span' => ['class']},
+                                :protocols => {'a' => {'href' => ['http', 'https', 'mailto']}})
+          item.description =text
           item.title = entry.title
           item.identifier = entry.id
           item.digital_location = entry.url
           item.date_broadcast = entry.published
           entry.media_contents.each do |mediaContent|
             url = mediaContent.url
-            next unless self.is_audio_file?(url)
+            next unless Utils.is_audio_file?(url)
             instance = item.instances.build
             instance.digital = true
             audio = AudioFile.new

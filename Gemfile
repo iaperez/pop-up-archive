@@ -72,6 +72,8 @@ gem 'feedzirra'
 
 gem 'rolify'
 
+gem 'sanitize'
+
 group :assets do
   gem 'sprockets'
   gem 'sass-rails',   '~> 3.2.3'
