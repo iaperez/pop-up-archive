@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 ruby '2.0.0'
 
-gem 'rails', '~> 3.2.0'
+gem 'rails', '~> 3.2.17'
 
 # Rails 4 pre-prep
 gem 'strong_parameters'
@@ -80,6 +80,9 @@ gem 'sanitize'
 gem 'soundcloud'
 
 gem 'amara', "~> 0.1.1"
+
+gem 'prerender_rails'
+
 # gem 'amara', :path => '../amara'
 # gem 'amara', github: 'PRX/amara'
 
@@ -104,7 +107,7 @@ gem 'text-table'
 >>>>>>> 829aa7c22ccd25b54908353b7df53208ea817954
 group :assets do
   gem 'sprockets'
-  gem 'sass-rails', '~> 3.2.3'
+  gem 'sass-rails', '~> 3.2'
   gem 'uglifier', '>= 1.0.3'
   gem 'bootstrap-sass'
   gem 'angularjs-rails-resource'
