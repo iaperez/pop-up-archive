@@ -19,5 +19,8 @@ config/env_vars
 db/seed/*
 #.idea is a rubymine folder
 .idea
+<<<<<<< HEAD
 /doc/notes.txt
 .powder
+=======
+>>>>>>> 829aa7c22ccd25b54908353b7df53208ea817954

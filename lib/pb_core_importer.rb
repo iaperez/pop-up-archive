@@ -36,7 +36,10 @@ class PBCoreImporter
         items << item
       end
     end
+<<<<<<< HEAD
     items
+=======
+>>>>>>> 829aa7c22ccd25b54908353b7df53208ea817954
   end
 
   def item_for_omeka_doc(doc)
@@ -67,6 +70,7 @@ class PBCoreImporter
       instance.location   = pbcInstance.location
 
       if pbcInstance.parts.blank?
+<<<<<<< HEAD
         # puts "instance: #{pbcInstance.inspect}"
         url = pbcInstance.location
         if url.blank? || !Utils.is_audio_file?(url)
@@ -74,6 +78,9 @@ class PBCoreImporter
         end
         # puts "url: #{url}"
 
+=======
+        url = pbcInstance.detect_element(:identifiers, match_attr: :source, match_value: ['URL', nil])
+>>>>>>> 829aa7c22ccd25b54908353b7df53208ea817954
         next unless Utils.is_audio_file?(url)
 
         audio = AudioFile.new
@@ -85,7 +92,11 @@ class PBCoreImporter
         audio.size              = pbcInstance.file_size.try(:value).to_i
       else
         pbcInstance.parts.each do |pbcPart|
+<<<<<<< HEAD
           url = pbcPart.detect_element(:identifiers, match_attr: :source, match_value: ['URL', nil])  ||  pbcPart.location
+=======
+          url = pbcPart.detect_element(:identifiers, match_attr: :source, match_value: ['URL', nil])
+>>>>>>> 829aa7c22ccd25b54908353b7df53208ea817954
           next unless Utils.is_audio_file?(url)
 
           audio = AudioFile.new

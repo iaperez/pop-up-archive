@@ -28,6 +28,7 @@ class RemoteImporter
       self.folder = URI.decode(self.folder)
       ftp.chdir(self.folder+"/")
     end
+<<<<<<< HEAD
 
     self.count = 0
     recursive_listing(ftp, self.folder)
@@ -77,6 +78,15 @@ class RemoteImporter
             item.save!
           end
         end
+=======
+    list_of_files = ftp.nlst("*")
+    puts "list out files in root directory:"
+    count = 0
+    list_of_files.each do |file|
+      next unless Utils.is_audio_file?(file)
+      if folder == nil
+        file_url ="ftp://#{self.user}:#{self.password}@#{self.url}/"+URI.encode(file)
+>>>>>>> 829aa7c22ccd25b54908353b7df53208ea817954
       else
         recursive_listing(ftp, folder+"/"+file_name)
       end

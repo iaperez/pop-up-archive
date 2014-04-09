@@ -70,6 +70,7 @@ class Utils
 
     def is_audio_file?(url)
       #puts "is_audio_file? url:#{url}"
+<<<<<<< HEAD
       begin
         uri = URI.parse(url)
         ext = (File.extname(uri.path)[1..-1] || "").downcase
@@ -80,5 +81,16 @@ class Utils
         false
       end
     end
+=======
+      uri = URI.parse(url)
+      ext = (File.extname(uri.path)[1..-1] || "").downcase
+      ['aac', 'aif', 'aiff', 'alac', 'flac', 'm4a', 'm4p', 'mp2', 'mp3', 'mp4', 'ogg', 'raw', 'spx', 'wav', 'wma'].include?(ext)
+    rescue  URI::BadURIError
+      false
+    rescue  URI::InvalidURIError
+      false
+    end
+
+>>>>>>> 829aa7c22ccd25b54908353b7df53208ea817954
   end
 end

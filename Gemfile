@@ -76,6 +76,7 @@ gem 'rolify'
 
 gem 'sanitize'
 
+<<<<<<< HEAD
 gem 'soundcloud'
 
 gem 'amara', "~> 0.1.1"
@@ -99,6 +100,8 @@ gem 'dbpedia'
 
 gem 'text-table'
 
+=======
+>>>>>>> 829aa7c22ccd25b54908353b7df53208ea817954
 group :assets do
   gem 'sprockets'
   gem 'sass-rails', '~> 3.2.3'
